@@ -9,6 +9,7 @@ def vigencia (meses): # função para calcular rescisão contratual
     return valorPagar
 
 valorFixoPlano = float(input("Valor do plano: R$ "))
+valorPlano = valorFixoPlano
 
 boleto = input("Possui boleto em aberto? [S/N] ")
 
@@ -18,8 +19,6 @@ if boleto.upper() == "S": # tem boleto em aberto
     if gerarProporcional.upper() == "N":
         diasUtilizados = int(input("Dias de utilização: "))
         valorPlano = proporcional(valorFixoPlano, diasUtilizados)
-    else:
-        valorPlano = valorFixoPlano
 
 possuiVigencia = input("Possui vigência contratual ativa? [S/N] ")
 
