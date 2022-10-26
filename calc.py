@@ -1,33 +1,44 @@
-import datas
+import datas 
 
-def proporcional (valorPlano, diasUtilizados): # função para calcular valor proporcional
-    valorPagar = (valorPlano / 30) * diasUtilizados
-    return valorPagar
+def proporcional (plano, dias): # função para calcular valor proporcional
+    valor = (plano / 30) * dias
+    return valor
 
 def vigencia (meses): # função para calcular rescisão contratual
-    valorPagar = meses * 25
-    return valorPagar
+    valor = meses * 25
+    return valor
 
 valorFixoPlano = float(input("Valor do plano: R$ "))
 valorPlano = valorFixoPlano
 
 boleto = input("Possui boleto em aberto? [S/N] ")
 
-if boleto.upper() == "S": # tem boleto em aberto
+if boleto.upper() == 'S': # caso tenha boleto em aberto
     gerarProporcional = input("Vai efetuar pagamento do valor integral? [S/N] ")
     
-    if gerarProporcional.upper() == "N":
-        diasUtilizados = int(input("Dias de utilização: "))
-        valorPlano = proporcional(valorFixoPlano, diasUtilizados)
+    if gerarProporcional.upper() == 'N': # caso vá fazer o pagamento de valor proporcional
+        diasUtilizados = datas.numeroDias()
+        print(f'São {diasUtilizados} dias de utilização. ')
+        valorPlano = proporcional(valorFixoPlano, diasUtilizados) # recebe o valor proporcional
+else:
+    valorPlano = 0
 
 possuiVigencia = input("Possui vigência contratual ativa? [S/N] ")
 
-if possuiVigencia.upper() == "S": # tem meses de vigência contratual ativa
+if possuiVigencia.upper() == 'S': # caso tenha meses de vigência contratual ativa
     meses = int(input("Quantos meses? [1-12] "))
     valorVigencia = vigencia(meses)
 else:
     valorVigencia = 0
 
-valorPlano += valorVigencia
+valorTotal = valorPlano + valorVigencia # caso haja vigência, o valor do plano também recebe o valor de vigência
 
-print(f"Valor a ser pago será R$ {valorPlano}. ")
+print(f"Valor a ser pago será R$ {valorPlano:.2f}. ")
+
+"""
+necessário arrumar ainda:
+
+- ponto flutuante para que arredonde sempre para o menor
+- tratamento de erros
+
+"""
